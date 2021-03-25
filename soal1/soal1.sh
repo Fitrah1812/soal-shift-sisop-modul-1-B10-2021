@@ -1,33 +1,36 @@
 #!bin/bash
 
-#1A
+#1A Tampilkan Error jumlah dan info jumlah
 sinfo="$(grep -E -o "INFO" syslog.log)"
 serror="$(grep -E -o "ERROR" syslog.log)"
-
 jinfo="$(grep -o "INFO" syslog.log | wc -l)"
 jerror="$(grep -o "ERROR" syslog.log | wc -l)"
 #echo $jinfo >> data.csv;
 #echo $jerror >> data.csv;
 
-#1B
-semuaerror =`cut -d $7 -f2 < syslog.log`
-echo $semuaerror;
-
-
+#1BTampilkan Error Beserta jumlahnya
+perror=`printf "$serror" | grep -o 'ERROR.*' syslog.log | cut -f2- -d\ | cut -d"(" -f 1 | sort -V | uniq -c | sort -n -r`
 #1C
 #uniq -> select distinct
 usertag=`cut -d"(" -f2 < syslog.log | cut -d")" -f1 | sort | uniq`
-echo $usertag > data.csv
 #1D
-update="$(grep -o "The ticket was modified while updating" syslog.log | wc -l)"
-gagal="$(grep -o "Permission denied while closing ticket" syslog.log | wc -l)"
-tambah="$(grep -o "Tried to add information to closed ticket" syslog.log | wc -l)"
-time="$(grep -o "Timeout while retrieving information" syslog.log | wc -l)"
-tikethabis="$(grep -o "Ticket doesn't exist" syslog.log | wc -l)"
-gagaldb="$(grep -o "Connection to DB failed" syslog.log | wc -l)"
+#update="$(grep -o "The ticket was modified while updating" syslog.log | wc -l)"
+#gagal="$(grep -o "Permission denied while closing ticket" syslog.log | wc -l)"
+#tambah="$(grep -o "Tried to add information to closed ticket" syslog.log | wc -l)"
+#time="$(grep -o "Timeout while retrieving information" syslog.log | wc -l)"
+#tikethabis="$(grep -o "Ticket doesn't exist" syslog.log | wc -l)"
+#gagaldb="$(grep -o "Connection to DB failed" syslog.log | wc -l)"
 
 teks="Error_Count";
-printf "The ticket was modified while updating,%d\nPermission denied while closing ticket,%d\nTried to add information to closed ticket,%d\nTimeout while retrieving information,%d\nTicket doesn't exist,%d\nConnection to DB failed,%d\n" $update $gagal $tambah $time $tikethabis $gagaldb | sort -t ',' -k2 -n -r | sed '1 i\'$teks > error_message.csv
+#printf "The ticket was modified while updating,%d\nPermission denied while closing ticket,%d\nTried to add information to closed ticket,%d\nTimeout while retrieving information,%d\nTicket doesn't exist,%d\nConnection to DB failed,%d\n" $update $gagal $tambah $time $tikethabis $gagaldb | sort -t ',' -k2 -n -r | sed '1 i\'$teks > error_message.csv
+
+echo "$perror" | while read cekerror
+do
+    jumlaherror=`echo $cekerror | cut -d ' ' -f 1`
+	namaerror=`echo $cekerror | cut -d ' ' -f 2-`
+	echo "$namaerror,$jumlaherror" 
+done | sed '1 i\'$teks > error_message.csv
+
 
 #cara kedua
 #echo $update, $gagal, $tambah, $time, $tikethabis, $gagal > error_message.csv
@@ -49,4 +52,7 @@ while read sum
         jumlahinfo=$(grep -E "INFO.*($sum))" syslog.log | wc -l)
         jumlaherror=$(grep -E "ERROR.*($sum))" syslog.log | wc -l)
         echo "$sum,$jumlahinfo,$jumlaherror"
-    done | sed '1 i\Username,INFO,ERROR' > user_statistic.csv
+    done | sed '1 i\Username,INFO,ERROR' > user_statistic.csv;
+
+
+
