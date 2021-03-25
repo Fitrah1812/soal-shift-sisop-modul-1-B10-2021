@@ -1,8 +1,8 @@
 #!bin/bash
 
 #1A
-sinfo= grep -E "INFO" syslog.log
-serror= grep -E "ERROR" syslog.log
+sinfo="$(grep -E -o "INFO" syslog.log)"
+serror="$(grep -E -o "ERROR" syslog.log)"
 
 jinfo="$(grep -o "INFO" syslog.log | wc -l)"
 jerror="$(grep -o "ERROR" syslog.log | wc -l)"
@@ -10,11 +10,13 @@ jerror="$(grep -o "ERROR" syslog.log | wc -l)"
 #echo $jerror >> data.csv;
 
 #1B
-
+semuaerror =`cut -d $7 -f2 < syslog.log`
+echo $semuaerror;
 
 
 #1C
-usertag=`grep -Po "(?<=\()(.*)(?=\))" syslog.log | sort | uniq`
+#uniq -> select distinct
+usertag=`cut -d"(" -f2 < syslog.log | cut -d")" -f1 | sort | uniq`
 echo $usertag > data.csv
 #1D
 update="$(grep -o "The ticket was modified while updating" syslog.log | wc -l)"
@@ -38,12 +40,13 @@ printf "The ticket was modified while updating,%d\nPermission denied while closi
 #echo "Connection to DB failed,$gagaldb" >> error_message.csv
 #sort -k 2 -t , error_message.csv >> error_message.csv
 #sort -t, -k2 -n error_message.csv >> error_message.csv
+
 #1E
 
-
-echo $usertag | while read -r sum
+printf "$usertag" | 
+while read sum
     do
-        jumlahinfo=$(grep -E -o "INFO.($sum))" syslog.log | wc -l)
-        jumlaherror=$(grep -E -o "ERROR.($sum))" syslog.log | wc -l)
+        jumlahinfo=$(grep -E "INFO.*($sum))" syslog.log | wc -l)
+        jumlaherror=$(grep -E "ERROR.*($sum))" syslog.log | wc -l)
         echo "$sum,$jumlahinfo,$jumlaherror"
-    done | sed '1 i\Username,Info,Error' > user_statistic.csv
+    done | sed '1 i\Username,INFO,ERROR' > user_statistic.csv
