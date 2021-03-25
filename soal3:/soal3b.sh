@@ -3,7 +3,6 @@
 cd ~/soal-shift-sisop-modul-1-B10-2021/soal3:
 bash ./soal3a.sh
 now=$(date +"%d-%m-%Y")
-echo "$now"
 mkdir "$now"
 
 mv ./Koleksi_* "./$now/"

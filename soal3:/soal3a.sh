@@ -11,13 +11,11 @@ do
 			a=$?
                         if [ $a -eq 0 ] 
                         then
-                                echo "PODO"
                                 rm "./Koleksi_0$q.jpg"
 				q=$((q-1))
 				break
                         fi
                 done
-                echo "BEDO"
         else
 		wget -O Koleksi_$q.jpg -a foto.log https://loremflickr.com/320/240/kitten
                 for((i=1; i<q; i=i+1))
@@ -28,7 +26,6 @@ do
 			        a=$?
                                 if [ $a -eq 0 ]
                                 then
-                                        echo "PODO"
 				        rm "./Koleksi_$q.jpg"
 				        q=$((q-1))
 				        break
@@ -38,13 +35,11 @@ do
 			        a=$?
                                 if [ $a -eq 0 ]
                                 then
-                                        echo "PODO"
 				        rm "./Koleksi_$q.jpg"
 				        q=$((q-1))
 				        break
                                 fi
                         fi
                 done
-                echo "BEDO"
         fi
 done
