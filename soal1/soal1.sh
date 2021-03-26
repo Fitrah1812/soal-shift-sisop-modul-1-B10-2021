@@ -10,6 +10,7 @@ jerror="$(grep -o "ERROR" syslog.log | wc -l)"
 
 #1BTampilkan Error Beserta jumlahnya
 perror=`printf "$serror" | grep -o 'ERROR.*' syslog.log | cut -f2- -d\ | cut -d"(" -f 1 | sort -V | uniq -c | sort -n -r`
+pinfo=`printf "$sinfo" | grep -o 'ERROR.*' syslog.log | cut -f2- -d\ | cut -d"(" -f 1 | sort -V | uniq -c | sort -n -r`
 #1C
 #uniq -> select distinct
 usertag=`cut -d"(" -f2 < syslog.log | cut -d")" -f1 | sort | uniq`
