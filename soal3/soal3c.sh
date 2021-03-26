@@ -1,13 +1,14 @@
 #!/bin/bash
 kemarin=$(date -d yesterday +"%d-%m-%Y")
 now=$(date +"%d-%m-%Y")
-slocate=$(ls Kucing_$kemarin)
+slocate=$(ls Kucing_$now)
 locate=$?
 if ((locate==0))
 then
-    q=0
+    q=1
+    j=1
     mkdir "Kelinci_$now"
-    for((q=1;q<=23; q=q+1))
+    for((j=1;j<=23; j=j+1))
     do
             if ((q<10))
             then
@@ -49,13 +50,15 @@ then
                             fi
                     done
             fi
+            q=$((q+1))
     done
     mv ./Koleksi_* "./Kelinci_$now/"
     mv ./foto.log "./Kelinci_$now/"
 else
     q=0
+    j=0
     mkdir "Kucing_$now"
-    for((q=1;q<=23; q=q+1))
+    for((j=1;j<=23; j=j+1))
     do
             if ((q<10))
             then
@@ -97,6 +100,7 @@ else
                             fi
                     done
             fi
+            q=$((q+1))
     done
     mv ./Koleksi_* "./Kucing_$now/"
     mv ./foto.log "./Kucing_$now/"

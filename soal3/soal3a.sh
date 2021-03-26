@@ -1,6 +1,7 @@
 #!/bin/bash
-q=0
-for((q=1;q<=23; q=q+1))
+q=1
+j=1
+for((j=1;j<=23; j=j+1))
 do
         if ((q<10))
         then
@@ -12,7 +13,7 @@ do
                         if [ $a -eq 0 ] 
                         then
                                 rm "./Koleksi_0$q.jpg"
-				q=$((q-1))
+				q=$((q-1))     
 				break
                         fi
                 done
@@ -42,4 +43,5 @@ do
                         fi
                 done
         fi
+        q=$((q+1))
 done
