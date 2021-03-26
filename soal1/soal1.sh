@@ -20,7 +20,7 @@ userinfo=`printf "$allerrorinfo" | grep -o 'INFO.*' syslog.log | cut -f2- -d"(" 
 teks="Error,Count";
 echo "$perror" | while read cekerror
 do
-    jumlaherror=`echo $cekerror | cut -d ' ' -f 1`
+    	jumlaherror=`echo $cekerror | cut -d ' ' -f 1`
 	namaerror=`echo $cekerror | cut -d ' ' -f 2-`
 	echo "$namaerror,$jumlaherror" 
 done | sed '1 i\'$teks > error_message.csv
