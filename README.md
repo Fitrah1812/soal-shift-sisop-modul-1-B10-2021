@@ -337,7 +337,7 @@ while read sum
     done | sed '1 i\'$teks2 > user_statistic.csv;
 ```
 Penyelesaian :
-Disini diminta untuk mengeluarkan dengan format Username,INFO,ERROR berdasarkan username yang akan dibuat sort by asc defaultnya sort adalah ascending. Oleh karena itu saya menggunakan usertag yang sudah saya buat di 1 C. Aapa saja isi usertag ? Isinya adalah sebagai berikut :
+Disini diminta untuk mengeluarkan dengan format Username,INFO,ERROR berdasarkan username yang akan dibuat sort by asc defaultnya sort adalah ascending. Oleh karena itu saya menggunakan usertag yang sudah saya buat di 1 C. Apa saja isi usertag ? Isinya adalah sebagai berikut :
 ``` csv
 ac
 ahmed.miller
@@ -386,11 +386,13 @@ sri,2,2
 ```
 
 **No. 2**  
-Steven dan Manis mendirikan sebuah startup bernama “TokoShiSop”. Sedangkan kamu dan Clemong adalah karyawan pertama dari TokoShiSop. Setelah tiga tahun bekerja, Clemong diangkat menjadi manajer penjualan TokoShiSop, sedangkan kamu menjadi kepala gudang yang mengatur keluar masuknya barang. Tiap tahunnya, TokoShiSop mengadakan Rapat Kerja yang membahas bagaimana hasil penjualan dan strategi kedepannya yang akan diterapkan. Kamu sudah sangat menyiapkan sangat matang untuk raker tahun ini. Tetapi tiba-tiba, Steven, Manis, dan Clemong meminta kamu untuk mencari beberapa kesimpulan dari data penjualan “Laporan-TokoShiSop.tsv”. Dari soal ini kita diminta untuk menyelesaikan permaslahan yang didapatkan oleh Steven dan Manis.  
+Steven dan Manis mendirikan sebuah startup bernama “TokoShiSop”. Sedangkan kamu dan Clemong adalah karyawan pertama dari TokoShiSop. Setelah tiga tahun bekerja, Clemong diangkat menjadi manajer penjualan TokoShiSop, sedangkan kamu menjadi kepala gudang yang mengatur keluar masuknya barang. Tiap tahunnya, TokoShiSop mengadakan Rapat Kerja yang membahas bagaimana hasil penjualan dan strategi kedepannya yang akan diterapkan. Kamu sudah sangat menyiapkan sangat matang untuk raker tahun ini. Tetapi tiba-tiba, Steven, Manis, dan Clemong meminta kamu untuk mencari beberapa kesimpulan dari data penjualan “Laporan-TokoShiSop.tsv”. Dari soal ini kita diminta untuk menyelesaikan permaslahan yang didapatkan oleh Steven, Manis, & Clemong.  
 
 A. Steven ingin mengapresiasi kinerja karyawannya selama ini dengan mengetahui **Row ID** dan **profit percentage** terbesar (jika hasil profit percentage terbesar lebih dari 1, maka ambil Row ID yang paling besar). Karena kamu bingung, Clemong memberikan definisi dari profit percentage, yaitu:     
 
 **𝑃𝑟𝑜𝑓𝑖𝑡 𝑃𝑒𝑟𝑐𝑒𝑛𝑡𝑎𝑔𝑒 = (𝑃𝑟𝑜𝑓𝑖𝑡 ÷ 𝐶𝑜𝑠𝑡 𝑃𝑟𝑖𝑐𝑒) × 100**  
+
+Cost Price didapatkan dari pengurangan Sales dengan Profit. (Quantity diabaikan).
   
 Jawaban:
 ``` Bash
@@ -401,5 +403,27 @@ Jawaban:
        		n=$1
 		}
 	 } 
-```
+```  
+Penyelesaian:  
+Disini diminta untuk menempilkan data yang berisi Row ID dan profit percentage terbesar dari data transaksi yang telah diberikan dan apabila profit percentage memiliki nilai yang sama maka yang ditampilkan hanya profit percentage dengan Row ID terbesar saja. Dimana hasil dari data yang ditampilkan akan disimpan ke dalam file  *hasil.txt* . Hasil yang telah didapatkan yaitu:  
+``` txt
+Transaksi terakhir dengan profit percentage terbesar yaitu 9952 dengan presentase 100.00%.
+```  
+  
+B. Clemong memiliki rencana promosi di Albuquerque menggunakan metode MLM. Oleh karena itu, Clemong membutuhkan daftar nama customer pada transaksi tahun 2017 di Albuquerque.  
+``` Bash
+#2B
+	 {if ($3 ~/17/ && $10 == "Albuquerque" && counter>=0)
+	  	{nama[counter]=$7;counter++}
+	 }
+```    
+Penyelesaian:  
+Data yang ingin ditampilkan adalah daftar nama customer yang bertransaksi pada tahun 2017 dan pada kota Alburqueque. Maka yang dapat kita lakukan adalah mencari nama customer tersebut yang memenuhi kriteria dengan cara membandingkan nama kota (kata) yang sama yakni Alburqueque dan tahun 2017. Dalam pengimplementasiannya terdapat dalam pengerjaan ini kami menggunakan operator equal (==) dan (~). Apabila telah memenuhi syarat maka nama customer akan disimpan kedalam array. Dimana hasil dari data yang ditampilkan akan disimpan ke dalam file  *hasil.txt* . Hasil yang telah didapatkan yaitu:    
+``` txt
+Daftar nama customer di Albuquerque pada tahun 2017 antara lain:
+Susan Vittorini
+David Wiener
+Benjamin Farhat
+Michelle Lonsdale
+```  
 4. Nomor 3
