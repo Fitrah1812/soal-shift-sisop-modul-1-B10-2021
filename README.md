@@ -6,9 +6,9 @@ Nama Kelompok :
 3. Lathifa Itqonina M 05111940000176
 
 
-Penjelasan Soal
-1. Nomor 1
-Ryujin baru saja diterima sebagai IT support di perusahaan Bukapedia. Dia diberikan tugas untuk membuat laporan harian untuk aplikasi internal perusahaan, ticky. Terdapat 2 laporan yang harus dia buat, yaitu laporan daftar peringkat pesan error terbanyak yang dibuat oleh ticky dan laporan penggunaan user pada aplikasi ticky. Dari soal ini kita diminta untuk menyelesaikan permasalahan yang didapatkan oleh Ryujin.
+## Penjelasan Soal   
+**No. 1**  
+Ryujin baru saja diterima sebagai IT support di perusahaan Bukapedia. Dia diberikan tugas untuk membuat laporan harian untuk aplikasi internal perusahaan, ticky. Terdapat 2 laporan yang harus dia buat, yaitu laporan daftar peringkat pesan error terbanyak yang dibuat oleh ticky dan laporan penggunaan user pada aplikasi ticky. Dari soal ini kita diminta untuk menyelesaikan permasalahan yang didapatkan oleh Ryujin.  
 A. Mengumpulkan informasi dari log aplikasi yang terdapat pada file syslog.log. Informasi yang diperlukan antara lain: jenis log (ERROR/INFO), pesan log, dan username pada setiap baris lognya. Karena Ryujin merasa kesulitan jika harus memeriksa satu per satu baris secara manual, dia menggunakan regex untuk mempermudah pekerjaannya. Bantulah Ryujin membuat regex tersebut.
 Jawaban : 
 
@@ -360,7 +360,7 @@ rr.robinson
 sri
 xlg
 ```
-Beirkut hasilnya yang sudah di sort secara ascending. Setelah itu saya memasukkan ke variabel sum dengan menggunakan looping mengambil jumlahinfo,jumlaherror dengan cara menggunakan wc -l untuk count jumlah error user, dan jumlah info user dan hal itu sudah dibuat dipoint C dan hanya memanggil saja. serta keluarkan format yang diinginkan hasilnya adalah sebagai berikut user_statistic.csv :
+Berikut hasilnya yang sudah di sort secara ascending. Setelah itu saya memasukkan ke variabel sum dengan menggunakan looping mengambil jumlahinfo,jumlaherror dengan cara menggunakan wc -l untuk count jumlah error user, dan jumlah info user dan hal itu sudah dibuat dipoint C dan hanya memanggil saja. serta keluarkan format yang diinginkan hasilnya adalah sebagai berikut user_statistic.csv :
 
 ``` csv
 Username,INFO,ERROR
@@ -385,5 +385,22 @@ rr.robinson,2,1
 sri,2,2
 ```
 
-3. Nomor 2
+**No. 2**  
+Steven dan Manis mendirikan sebuah startup bernama “TokoShiSop”. Sedangkan kamu dan Clemong adalah karyawan pertama dari TokoShiSop. Setelah tiga tahun bekerja, Clemong diangkat menjadi manajer penjualan TokoShiSop, sedangkan kamu menjadi kepala gudang yang mengatur keluar masuknya barang. Tiap tahunnya, TokoShiSop mengadakan Rapat Kerja yang membahas bagaimana hasil penjualan dan strategi kedepannya yang akan diterapkan. Kamu sudah sangat menyiapkan sangat matang untuk raker tahun ini. Tetapi tiba-tiba, Steven, Manis, dan Clemong meminta kamu untuk mencari beberapa kesimpulan dari data penjualan “Laporan-TokoShiSop.tsv”. Dari soal ini kita diminta untuk menyelesaikan permaslahan yang didapatkan oleh Steven dan Manis.  
+>A. Steven ingin mengapresiasi kinerja karyawannya selama ini dengan mengetahui **Row ID** dan **profit percentage** terbesar (jika hasil profit percentage terbesar lebih dari 1, maka ambil Row ID yang paling besar). Karena kamu bingung, Clemong memberikan definisi dari profit percentage, yaitu:     
+
+>**𝑃𝑟𝑜𝑓𝑖𝑡 𝑃𝑒𝑟𝑐𝑒𝑛𝑡𝑎𝑔𝑒 = (𝑃𝑟𝑜𝑓𝑖𝑡 ÷ 𝐶𝑜𝑠𝑡 𝑃𝑟𝑖𝑐𝑒) × 100**  
+  
+>Jawaban:
+``` Bash
+#2A
+teks2="Username,INFO,ERROR"
+printf "$usertag" | 
+while read sum
+    do
+        jumlahinfo=$(grep -E "INFO.*($sum))" syslog.log | wc -l)
+        jumlaherror=$(grep -E "ERROR.*($sum))" syslog.log | wc -l)
+        echo "$sum,$jumlahinfo,$jumlaherror"
+    done | sed '1 i\'$teks2 > user_statistic.csv;
+```
 4. Nomor 3
