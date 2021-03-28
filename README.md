@@ -410,7 +410,7 @@ Disini diminta untuk menempilkan data yang berisi Row ID dan profit percentage t
 Transaksi terakhir dengan profit percentage terbesar yaitu 9952 dengan presentase 100.00%.
 ```  
   
-B. Clemong memiliki rencana promosi di Albuquerque menggunakan metode MLM. Oleh karena itu, Clemong membutuhkan daftar nama customer pada transaksi tahun 2017 di Albuquerque.  
+B. Clemong memiliki rencana promosi di Albuquerque menggunakan metode MLM. Oleh karena itu, Clemong membutuhkan daftar **nama customer pada transaksi tahun 2017 di Albuquerque**.  
 ``` Bash
 #2B
 	 {if ($3 ~/17/ && $10 == "Albuquerque" && counter>=0)
@@ -448,7 +448,7 @@ Data yang ingin ditampilkan adalah segmen customer dan jumlah transaksi paling s
 Tipe segmen customer yang penjualannya paling sedikit adalah Home Office dengan 1783 transaksi.
 ```  
   
-D. TokoShiSop membagi wilayah bagian (region) penjualan menjadi empat bagian, antara lain: Central, East, South, dan West. Manis ingin mencari wilayah bagian (region) yang memiliki total keuntungan (profit) paling sedikit dan total keuntungan wilayah tersebut.  
+D. TokoShiSop membagi wilayah bagian (region) penjualan menjadi empat bagian, antara lain: Central, East, South, dan West. Manis ingin **mencari wilayah bagian (region) yang memiliki total keuntungan (profit) paling sedikit** dan **total keuntungan wilayah tersebut**.  
 ``` Bash
 #2D
 	 {
@@ -508,4 +508,4 @@ Tipe segmen customer yang penjualannya paling sedikit adalah Home Office dengan 
 Wilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah Central dengan total keuntungan 39706.362500
 ```  
 
-##Nomor 3
+## No. 3
