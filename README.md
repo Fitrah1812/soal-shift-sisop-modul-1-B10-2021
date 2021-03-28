@@ -387,20 +387,19 @@ sri,2,2
 
 **No. 2**  
 Steven dan Manis mendirikan sebuah startup bernama “TokoShiSop”. Sedangkan kamu dan Clemong adalah karyawan pertama dari TokoShiSop. Setelah tiga tahun bekerja, Clemong diangkat menjadi manajer penjualan TokoShiSop, sedangkan kamu menjadi kepala gudang yang mengatur keluar masuknya barang. Tiap tahunnya, TokoShiSop mengadakan Rapat Kerja yang membahas bagaimana hasil penjualan dan strategi kedepannya yang akan diterapkan. Kamu sudah sangat menyiapkan sangat matang untuk raker tahun ini. Tetapi tiba-tiba, Steven, Manis, dan Clemong meminta kamu untuk mencari beberapa kesimpulan dari data penjualan “Laporan-TokoShiSop.tsv”. Dari soal ini kita diminta untuk menyelesaikan permaslahan yang didapatkan oleh Steven dan Manis.  
->A. Steven ingin mengapresiasi kinerja karyawannya selama ini dengan mengetahui **Row ID** dan **profit percentage** terbesar (jika hasil profit percentage terbesar lebih dari 1, maka ambil Row ID yang paling besar). Karena kamu bingung, Clemong memberikan definisi dari profit percentage, yaitu:     
 
->**𝑃𝑟𝑜𝑓𝑖𝑡 𝑃𝑒𝑟𝑐𝑒𝑛𝑡𝑎𝑔𝑒 = (𝑃𝑟𝑜𝑓𝑖𝑡 ÷ 𝐶𝑜𝑠𝑡 𝑃𝑟𝑖𝑐𝑒) × 100**  
+A. Steven ingin mengapresiasi kinerja karyawannya selama ini dengan mengetahui **Row ID** dan **profit percentage** terbesar (jika hasil profit percentage terbesar lebih dari 1, maka ambil Row ID yang paling besar). Karena kamu bingung, Clemong memberikan definisi dari profit percentage, yaitu:     
+
+**𝑃𝑟𝑜𝑓𝑖𝑡 𝑃𝑒𝑟𝑐𝑒𝑛𝑡𝑎𝑔𝑒 = (𝑃𝑟𝑜𝑓𝑖𝑡 ÷ 𝐶𝑜𝑠𝑡 𝑃𝑟𝑖𝑐𝑒) × 100**  
   
->Jawaban:
+Jawaban:
 ``` Bash
 #2A
-teks2="Username,INFO,ERROR"
-printf "$usertag" | 
-while read sum
-    do
-        jumlahinfo=$(grep -E "INFO.*($sum))" syslog.log | wc -l)
-        jumlaherror=$(grep -E "ERROR.*($sum))" syslog.log | wc -l)
-        echo "$sum,$jumlahinfo,$jumlaherror"
-    done | sed '1 i\'$teks2 > user_statistic.csv;
+	 {if (find <= ($21/($18-$21))*100) 
+		{
+		find=($21/($18-$21))*100
+       		n=$1
+		}
+	 } 
 ```
 4. Nomor 3
