@@ -1,4 +1,11 @@
 # soal-shift-sisop-modul-1-B10-2021
+Kelompok B10 
+Nama Kelompok :
+1. Fitrah Arie Ramadhan 05111940000025
+2. Yusrill Zubaydi 05111940000160
+3. Lathifa Itqonina M 05111940000176
+
+
 Penjelasan Soal
 1. Nomor 1
 Ryujin baru saja diterima sebagai IT support di perusahaan Bukapedia. Dia diberikan tugas untuk membuat laporan harian untuk aplikasi internal perusahaan, ticky. Terdapat 2 laporan yang harus dia buat, yaitu laporan daftar peringkat pesan error terbanyak yang dibuat oleh ticky dan laporan penggunaan user pada aplikasi ticky. Dari soal ini kita diminta untuk menyelesaikan permasalahan yang didapatkan oleh Ryujin.
@@ -230,7 +237,9 @@ pinfo=`printf "$allerrorinfo" | grep -o 'INFO.*' syslog.log | cut -f2- -d\ | cut
 Penyelesaian : 
 Setelah kita mendapatkan hasil dari permasalahan A kita bisa melanjutkan permasalahan kedua yaitu menampilkan semua pesan error yang muncul beserta jumlahnya disini saya buat error dan info supaya saya bisa checking lagi untuk nomor selanjutnya. Disini saya akan menjelaskan ide yang saya buat yaitu mengambil semua pesan error diletakkan di perror dan semua pesan info diletakkan di pinfo. Ide saya adalah saya cek apalagi line itu mengandung (ERROR/INFO) dan diklusterisasi ke variabel yang sudah dibuat. Ide disini untuk hanya mengambil pesan saja yaitu ambil line setelah (ERROR/INFO) sampai program ketemu dengan "(" dengan menggunakan cut -d"(" maksudnya adalah memotong sampai ketemu delimeter "(". Setelah itu disini saya lakukan sorting value, mengambil nilai uniq -c dan setelah itu saya sort secara Descending. Hasilnya adalah sebagai berikut
 
-
+``` Csv
+15 Timeout while retrieving information 13 Connection to DB failed 12 Tried to add information to closed ticket 10 Permission denied while closing ticket 9 The ticket was modified while updating 7 Ticket doesn't exist
+```
 
 C. Ryujin juga harus dapat menampilkan jumlah kemunculan log ERROR dan INFO untuk setiap user-nya.
 Jawaban :
@@ -243,7 +252,49 @@ userinfo=`printf "$allerrorinfo" | grep -o 'INFO.*' syslog.log | cut -f2- -d"(" 
 #echo "$usererror" > usererror.csv
 #echo "$userinfo" > infoerror.csv
 ```
-
+Penyelesaian :
+Penyelesaian yang saya buat disini untuk memunculkan jumlah kemunculan log ERROR dan INFO untuk setiap usernya sehingga saya membutuhkan dua variabel untuk mengakomodasi hal tersebut adapun idenya sama yaitu mengambil teks setelah ERROR dengan syarat baru yaitu abis kalimat yang terdapat delimeter "(" sampai ketemu didelimeter ")" untuk mengambil usernya setelah itu saya sort by value dan jangan lupa meletakkan uniq agar tidak ada duplikasi -c adalah count berapa kali muncul hasilnya adalah sebagai berikut"
+1. usererror
+``` csv
+      2 ac
+      4 ahmed.miller
+      6 blossom
+      2 bpacheco
+      5 breee
+      1 britanni
+      3 enim.non
+      5 flavia
+      4 jackowens
+      1 kirknixon
+      3 mai.hendrix
+      3 mcintosh
+      3 mdouglas
+      4 montanap
+      3 noel
+      3 nonummy
+      7 oren
+      1 rr.robinson
+      2 sri
+      4 xlg
+```
+2. userinfo
+``` csv
+      2 ac
+      2 ahmed.miller
+      2 blossom
+      1 breee
+      1 britanni
+      2 enim.non
+      2 jackowens
+      2 kirknixon
+      4 mcintosh
+      2 mdouglas
+      6 noel
+      2 nonummy
+      2 oren
+      2 rr.robinson
+      2 sri
+```
 
 
 D. Semua informasi yang didapatkan pada poin b dituliskan ke dalam file error_message.csv dengan header Error,Count yang kemudian diikuti oleh daftar pesan error dan jumlah kemunculannya diurutkan berdasarkan jumlah kemunculan pesan error dari yang terbanyak.
@@ -255,9 +306,21 @@ teks="Error,Count";
 echo "$perror" | while read cekerror
 do
     	jumlaherror=`echo $cekerror | cut -d ' ' -f 1`
-	    namaerror=`echo $cekerror | cut -d ' ' -f 2-`
-	    echo "$namaerror,$jumlaherror" 
+	namaerror=`echo $cekerror | cut -d ' ' -f 2-`
+	echo "$namaerror,$jumlaherror" 
 done | sed '1 i\'$teks > error_message.csv
+```
+
+Penyelesaian : 
+Setelah saya mendapatkan perror diatas saya meminta untuk dibaca dengan menggunakan variabel cekerror dan pastinya menggunakan looping. Untuk disini secara mudahnya adalah mengambil field 1 yaitu berupa angka serta mengambil field 2 dan selanjutnya untuk menentukan pesan error yang akan ditampilkan hal ini sudah didapatkan dari B hanya saja kita harus menggunakan format contoh yang sudah tertera. Dan tidak lupa pula saya menggunakan sed untuk menyisipkan sebuah kata di indeks pertama. Hasilnya adalah sebagai berikut :
+```csv
+Error,Count
+Timeout while retrieving information,15
+Connection to DB failed,13
+Tried to add information to closed ticket,12
+Permission denied while closing ticket,10
+The ticket was modified while updating,9
+Ticket doesn't exist,7
 ```
 
 E. Semua informasi yang didapatkan pada poin c dituliskan ke dalam file user_statistic.csv dengan header Username,INFO,ERROR diurutkan berdasarkan username secara ascending.
@@ -273,7 +336,54 @@ while read sum
         echo "$sum,$jumlahinfo,$jumlaherror"
     done | sed '1 i\'$teks2 > user_statistic.csv;
 ```
+Penyelesaian :
+Disini diminta untuk mengeluarkan dengan format Username,INFO,ERROR berdasarkan username yang akan dibuat sort by asc defaultnya sort adalah ascending. Oleh karena itu saya menggunakan usertag yang sudah saya buat di 1 C. Aapa saja isi usertag ? Isinya adalah sebagai berikut :
+``` csv
+ac
+ahmed.miller
+blossom
+bpacheco
+breee
+britanni
+enim.non
+flavia
+jackowens
+kirknixon
+mai.hendrix
+mcintosh
+mdouglas
+montanap
+noel
+nonummy
+oren
+rr.robinson
+sri
+xlg
+```
+Beirkut hasilnya yang sudah di sort secara ascending. Setelah itu saya memasukkan ke variabel sum dengan menggunakan looping mengambil jumlahinfo,jumlaherror dengan cara menggunakan wc -l untuk count jumlah error user, dan jumlah info user dan hal itu sudah dibuat dipoint C dan hanya memanggil saja. serta keluarkan format yang diinginkan hasilnya adalah sebagai berikut user_statistic.csv :
 
+``` csv
+Username,INFO,ERROR
+ac,2,2
+ahmed.miller,2,4
+blossom,2,6
+bpacheco,0,2
+breee,1,5
+britanni,1,1
+enim.non,2,3
+flavia,0,5
+jackowens,2,4
+kirknixon,2,1
+mai.hendrix,0,3
+mcintosh,4,3
+mdouglas,2,3
+montanap,0,4
+noel,6,3
+nonummy,2,3
+oren,2,7
+rr.robinson,2,1
+sri,2,2
+```
 
 3. Nomor 2
 4. Nomor 3
