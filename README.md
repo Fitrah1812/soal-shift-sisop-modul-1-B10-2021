@@ -405,7 +405,7 @@ Jawaban:
 	 } 
 ```  
 Penyelesaian:  
-Disini diminta untuk menempilkan data yang berisi Row ID dan profit percentage terbesar dari data transaksi yang telah diberikan dan apabila profit percentage memiliki nilai yang sama maka yang ditampilkan hanya profit percentage dengan Row ID terbesar saja. Dimana hasil dari data yang ditampilkan akan disimpan ke dalam file  *hasil.txt* . Hasil yang telah didapatkan yaitu:  
+Disini diminta untuk menempilkan data yang berisi Row ID dan profit percentage terbesar dari data transaksi yang telah diberikan dan apabila profit percentage memiliki nilai yang sama maka yang ditampilkan hanya profit percentage dengan Row ID terbesar saja. Maka untuk memperoleh data tersebut dilakukan operasi perhitungan (profit percentage) sesuai dengan rumus yang telah diberikan dan untuk mencari profit percentage terbesar dengan menggunakan statement if yang memanfaatkan operator '<='. Dimana hasil dari data yang ditampilkan akan disimpan ke dalam file  *hasil.txt* . Hasil yang telah didapatkan yaitu:  
 ``` txt
 Transaksi terakhir dengan profit percentage terbesar yaitu 9952 dengan presentase 100.00%.
 ```  
@@ -418,7 +418,7 @@ B. Clemong memiliki rencana promosi di Albuquerque menggunakan metode MLM. Oleh 
 	 }
 ```    
 Penyelesaian:  
-Data yang ingin ditampilkan adalah daftar nama customer yang bertransaksi pada tahun 2017 dan pada kota Alburqueque. Maka yang dapat kita lakukan adalah mencari nama customer tersebut yang memenuhi kriteria dengan cara membandingkan nama kota (kata) yang sama yakni Alburqueque dan tahun 2017. Dalam pengimplementasiannya terdapat dalam pengerjaan ini kami menggunakan operator equal (==) dan (~). Apabila telah memenuhi syarat maka nama customer akan disimpan kedalam array. Dimana hasil dari data yang ditampilkan akan disimpan ke dalam file  *hasil.txt* . Hasil yang telah didapatkan yaitu:    
+Data yang ingin ditampilkan adalah daftar nama customer yang **bertransaksi pada tahun 2017** dan pada **kota Alburqueque**. Maka yang dapat kita lakukan adalah mencari nama customer tersebut yang memenuhi kriteria dengan cara membandingkan nama kota (kata) yang sama yakni Alburqueque dan tahun 2017. Dalam pengimplementasiannya terdapat dalam pengerjaan ini kami menggunakan operator equal (==) dan (~). Apabila telah memenuhi syarat maka nama customer akan disimpan kedalam array. Dimana hasil dari data yang ditampilkan akan disimpan ke dalam file  *hasil.txt* . Hasil yang telah didapatkan yaitu:    
 ``` txt
 Daftar nama customer di Albuquerque pada tahun 2017 antara lain:
 Susan Vittorini
@@ -426,4 +426,19 @@ David Wiener
 Benjamin Farhat
 Michelle Lonsdale
 ```  
+C. TokoShiSop berfokus tiga segment customer, antara lain: Home Office, Customer, dan Corporate. Clemong ingin meningkatkan penjualan pada segmen customer yang paling sedikit. Oleh karena itu, Clemong membutuhkan **segment customer** dan **jumlah transaksinya yang paling sedikit**.  
+``` Bash
+#2C 
+	 {
+	 	if($8 == "Home Office") {flag1++}
+		else if($8 == "Consumer") {flag2++}
+		else if($8 == "Corporate"){flag3++}
+		
+	 }
+```  
+Penyelesaian:  
+
+```txt
+Tipe segmen customer yang penjualannya paling sedikit adalah Home Office dengan 1783 transaksi.
+```
 4. Nomor 3
