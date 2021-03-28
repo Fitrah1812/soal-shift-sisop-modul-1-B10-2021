@@ -435,10 +435,77 @@ C. TokoShiSop berfokus tiga segment customer, antara lain: Home Office, Customer
 		else if($8 == "Corporate"){flag3++}
 		
 	 }
-```  
-Penyelesaian:  
-
-```txt
+	 {if (flag1<flag2 && flag1<flag3){flag=flag1;segmen="Home Office"}
+	 else if (flag2<flag1 && flag2<flag3){flag=flag2;segmen="Consumer"}
+	 else if (flag3<flag1 && flag3<flag2){flag=flag3;segmen="Corporate"}
+	 }
+	
+```    
+Penyelesaian:    
+Data yang ingin ditampilkan adalah segmen customer dan jumlah transaksi paling sedikit dari semua segmen yang ada. Dalam penyelesainnya kami menggunakan statement if dan else untuk menemukan kodisi yang sesuai dengan syarat yang telah ditentukan. Dimana per-segmen akan dilakukan counter atau penambahan pada setiap iterasinya pada sebuah variable apabila segmen consumer yang dibandingkan dengan string yang telah ditentukan sama. Setelah diketahui jumlah transaksi persegmen-nya maka dilakukan perbandingan yang di implementasikan menggunakan statemen if else pula untuk mendapatkan jumlah segment yang melakukan transaksi paling sedikit.
+  
+``` txt
 Tipe segmen customer yang penjualannya paling sedikit adalah Home Office dengan 1783 transaksi.
-```
-4. Nomor 3
+```  
+  
+D. TokoShiSop membagi wilayah bagian (region) penjualan menjadi empat bagian, antara lain: Central, East, South, dan West. Manis ingin mencari wilayah bagian (region) yang memiliki total keuntungan (profit) paling sedikit dan total keuntungan wilayah tersebut.  
+``` Bash
+#2D
+	 {
+	 	if($13 == "South") {profit1+=$21}
+		else if($13 == "West") {profit2+=$21}
+		else if($13 == "Central"){profit3+=$21}
+		else if($13 == "East"){profit4+=$21}
+		
+	 }
+	 {if (profit1<profit2 && profit1<flag3 && profit1<profit4){total=profit1;region="South"}
+	 else if (profit2<profit1 && profit2<profit3 && profit2<profit4){total=profit2;region="West"}
+	 else if (profit3<profit1 && profit3<profit2 && profit3<profit4){total=profit3;region="Central"}
+	 else if (profit4<profit1 && profit4<profit2 && profit4<profit3){total=profit4;region="East"}
+	 }
+```  
+  
+Penyelesaian:   
+Data yang ingin ditampilkan pada poin ini adalah wilayah yang memiliki total keuntungan yang paling sedikit. Maka untuk mendapatkannya sama sepert,i poin sebelumnya yakni 2C terlebih dahulu dengan menggunakan if else dilakukan perbandingan antara data (nama wilayah/region) dengan string yang telah ditentukan. Kemudian apabila memenuhi statement tersebut maka dilakukan penambahan keuntungan(profit) pada sebuah variable per-region untuk disimpan hingga data yang diiterasikan habis. Setalah itu dilakukan perbandingan untuk mendapatkan profit dari region mana yang paling sedikit. 
+``` txt
+Wilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah Central dengan total keuntungan 39706.362500
+```    
+E. kamu diharapkan bisa membuat sebuah script yang akan menghasilkan file “hasil.txt” yang memiliki format yang telah ditentukan!  
+``` Bash
+#2E
+	    printf "Transaksi terakhir dengan profit percentage terbesar yaitu %d dengan presentase %.2f%%.\n\n\n" ,n,find
+	    printf "Daftar nama customer di Albuquerque pada tahun 2017 antara lain:\n"
+	    while(counter--)
+	    {
+		if (nama[counter]!=nama[counter+1]){
+	    		printf "%s\n",nama[counter]
+		}
+		else{
+		    	continue
+		}
+	    }
+	    printf "\n"
+	    printf "Tipe segmen customer yang penjualannya paling sedikit adalah %s dengan %d transaksi.\n\n\n",segmen,flag
+	    printf "Wilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah %s dengan total keuntungan %f",region,total
+         } 
+	 /home/lathifa/Documents/shift/modul1/Laporan-TokoShiSop.tsv > /home/lathifa/Documents/shift/modul1/hasil.txt
+```  
+Isi dari *hasil.txt*:  
+``` txt
+Transaksi terakhir dengan profit percentage terbesar yaitu 9952 dengan presentase 100.00%.
+
+
+Daftar nama customer di Albuquerque pada tahun 2017 antara lain:
+Susan Vittorini
+David Wiener
+Benjamin Farhat
+Michelle Lonsdale
+
+
+Tipe segmen customer yang penjualannya paling sedikit adalah Home Office dengan 1783 transaksi.
+
+
+Wilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah Central dengan total keuntungan 39706.362500
+```  
+
+##Nomor 3
