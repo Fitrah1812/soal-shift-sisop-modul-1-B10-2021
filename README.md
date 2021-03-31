@@ -508,4 +508,561 @@ Tipe segmen customer yang penjualannya paling sedikit adalah Home Office dengan 
 Wilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah Central dengan total keuntungan 39706.362500
 ```  
 
-### No. 3
+**No. 3**
+Kuuhaku adalah orang yang sangat suka mengoleksi foto-foto digital, namun Kuuhaku juga merupakan seorang yang pemalas sehingga ia tidak ingin repot-repot mencari foto, selain itu ia juga seorang pemalu, sehingga ia tidak ingin ada orang yang melihat koleksinya tersebut, sayangnya ia memiliki teman bernama Steven yang memiliki rasa kepo yang luar biasa. Kuuhaku pun memiliki ide agar Steven tidak bisa melihat koleksinya, serta untuk mempermudah hidupnya, yaitu dengan meminta bantuan kalian.
+A. Membuat script untuk mengunduh 23 gambar dari "https://loremflickr.com/320/240/kitten" serta menyimpan log-nya ke file "Foto.log". Karena gambar yang diunduh acak, ada kemungkinan gambar yang sama terunduh lebih dari sekali, oleh karena itu kalian harus menghapus gambar yang sama (tidak perlu mengunduh gambar lagi untuk menggantinya). Kemudian menyimpan gambar-gambar tersebut dengan nama "Koleksi_XX" dengan nomor yang berurutan tanpa ada nomor yang hilang
+
+Jawaban :
+``` Bash
+#!/bin/bash
+q=1
+j=1
+for((j=1;j<=23; j=j+1))
+do
+        if ((q<10))
+        then
+		wget -O Koleksi_0$q.jpg -a foto.log https://loremflickr.com/320/240/kitten
+                for((i=1; i<q; i=i+1))
+                do
+			s=$(cmp "./Koleksi_0$i.jpg" "./Koleksi_0$q.jpg")
+			a=$?
+                        if [ $a -eq 0 ] 
+                        then
+                                rm "./Koleksi_0$q.jpg"
+				q=$((q-1))     
+				break
+                        fi
+                done
+        else
+		wget -O Koleksi_$q.jpg -a foto.log https://loremflickr.com/320/240/kitten
+                for((i=1; i<q; i=i+1))
+                do
+			if((i<10))
+                        then
+                                s=$(cmp "./Koleksi_0$i.jpg" "./Koleksi_$q.jpg")
+			        a=$?
+                                if [ $a -eq 0 ]
+                                then
+				        rm "./Koleksi_$q.jpg"
+				        q=$((q-1))
+				        break
+                                fi
+                        else
+                                s=$(cmp "./Koleksi_$i.jpg" "./Koleksi_$q.jpg")
+			        a=$?
+                                if [ $a -eq 0 ]
+                                then
+				        rm "./Koleksi_$q.jpg"
+				        q=$((q-1))
+				        break
+                                fi
+                        fi
+                done
+        fi
+        q=$((q+1))
+done
+```
+Penyelesaian :
+Untuk mengunduh gambar secara berulang ulang, salah satu metode yang bisa digunakan adalah menggunakan looping hingga 23 kali. Mengunduh file dengan perintah wget dengan option -O untuk menamai file sesuai dengan perntah dan -a untuk menyimpan log ke dalam file foto.log. Agar tidak ada foto yang sama, dilakukan checking menggunakan fungsi cmp, apabila return dari fungsi tersebut adalah 0, maka foto tersebut sama. Proses ini juga diulang ulang untuk setiap foto yang terdownload.
+
+Berikut adalah contoh dari foto.log yang didapatkan setelah proses:
+
+``` log
+--2021-03-30 16:45:45--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50310242268_3112d0fd3a_320_240_nofilter.jpg [following]
+--2021-03-30 16:45:46--  https://loremflickr.com/cache/resized/65535_50310242268_3112d0fd3a_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 14902 (15K) [image/jpeg]
+Saving to: ‘Koleksi_01.jpg’
+
+     0K .......... ....                                       100% 1013K=0.01s
+
+2021-03-30 16:45:46 (1013 KB/s) - ‘Koleksi_01.jpg’ saved [14902/14902]
+
+--2021-03-30 16:45:46--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_51037509582_7b097cb089_320_240_nofilter.jpg [following]
+--2021-03-30 16:45:47--  https://loremflickr.com/cache/resized/65535_51037509582_7b097cb089_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 12216 (12K) [image/jpeg]
+Saving to: ‘Koleksi_02.jpg’
+
+     0K .......... .                                          100% 1.13M=0.01s
+
+2021-03-30 16:45:47 (1.13 MB/s) - ‘Koleksi_02.jpg’ saved [12216/12216]
+
+--2021-03-30 16:45:47--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50338047032_b575c6aacf_320_240_nofilter.jpg [following]
+--2021-03-30 16:45:49--  https://loremflickr.com/cache/resized/65535_50338047032_b575c6aacf_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 9637 (9.4K) [image/jpeg]
+Saving to: ‘Koleksi_03.jpg’
+
+     0K .........                                             100% 3.31M=0.003s
+
+2021-03-30 16:45:49 (3.31 MB/s) - ‘Koleksi_03.jpg’ saved [9637/9637]
+
+--2021-03-30 16:45:49--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50925575496_ded5b41162_320_240_nofilter.jpg [following]
+--2021-03-30 16:45:50--  https://loremflickr.com/cache/resized/65535_50925575496_ded5b41162_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 16627 (16K) [image/jpeg]
+Saving to: ‘Koleksi_04.jpg’
+
+     0K .......... ......                                     100% 1.06M=0.02s
+
+2021-03-30 16:45:50 (1.06 MB/s) - ‘Koleksi_04.jpg’ saved [16627/16627]
+
+--2021-03-30 16:45:50--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_51037509582_7b097cb089_320_240_nofilter.jpg [following]
+--2021-03-30 16:45:51--  https://loremflickr.com/cache/resized/65535_51037509582_7b097cb089_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 12216 (12K) [image/jpeg]
+Saving to: ‘Koleksi_05.jpg’
+
+     0K .......... .                                          100% 1.25M=0.009s
+
+2021-03-30 16:45:52 (1.25 MB/s) - ‘Koleksi_05.jpg’ saved [12216/12216]
+
+--2021-03-30 16:45:52--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50745657987_4c85192fa9_n_320_240_nofilter.jpg [following]
+--2021-03-30 16:45:53--  https://loremflickr.com/cache/resized/65535_50745657987_4c85192fa9_n_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 21776 (21K) [image/jpeg]
+Saving to: ‘Koleksi_05.jpg’
+
+     0K .......... .......... .                               100%  880K=0.02s
+
+2021-03-30 16:45:53 (880 KB/s) - ‘Koleksi_05.jpg’ saved [21776/21776]
+
+--2021-03-30 16:45:53--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50956077308_6327c6c947_320_240_nofilter.jpg [following]
+--2021-03-30 16:45:54--  https://loremflickr.com/cache/resized/65535_50956077308_6327c6c947_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 24589 (24K) [image/jpeg]
+Saving to: ‘Koleksi_06.jpg’
+
+     0K .......... .......... ....                            100%  794K=0.03s
+
+2021-03-30 16:45:54 (794 KB/s) - ‘Koleksi_06.jpg’ saved [24589/24589]
+
+--2021-03-30 16:45:54--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50921453436_663cd8a883_320_240_nofilter.jpg [following]
+--2021-03-30 16:45:55--  https://loremflickr.com/cache/resized/65535_50921453436_663cd8a883_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 15006 (15K) [image/jpeg]
+Saving to: ‘Koleksi_07.jpg’
+
+     0K .......... ....                                       100% 1003K=0.01s
+
+2021-03-30 16:45:56 (1003 KB/s) - ‘Koleksi_07.jpg’ saved [15006/15006]
+
+--2021-03-30 16:45:56--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50488056162_04ebb8bd48_320_240_nofilter.jpg [following]
+--2021-03-30 16:45:57--  https://loremflickr.com/cache/resized/65535_50488056162_04ebb8bd48_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 19030 (19K) [image/jpeg]
+Saving to: ‘Koleksi_08.jpg’
+
+     0K .......... ........                                   100% 1.05M=0.02s
+
+2021-03-30 16:45:57 (1.05 MB/s) - ‘Koleksi_08.jpg’ saved [19030/19030]
+
+--2021-03-30 16:45:57--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50343217467_162d62138a_320_240_nofilter.jpg [following]
+--2021-03-30 16:45:58--  https://loremflickr.com/cache/resized/65535_50343217467_162d62138a_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 9342 (9.1K) [image/jpeg]
+Saving to: ‘Koleksi_09.jpg’
+
+     0K .........                                             100%  108M=0s
+
+2021-03-30 16:45:58 (108 MB/s) - ‘Koleksi_09.jpg’ saved [9342/9342]
+
+--2021-03-30 16:45:58--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50819271792_25b4393abc_320_240_nofilter.jpg [following]
+--2021-03-30 16:46:00--  https://loremflickr.com/cache/resized/65535_50819271792_25b4393abc_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 11980 (12K) [image/jpeg]
+Saving to: ‘Koleksi_10.jpg’
+
+     0K .......... .                                          100% 1.92M=0.006s
+
+2021-03-30 16:46:00 (1.92 MB/s) - ‘Koleksi_10.jpg’ saved [11980/11980]
+
+--2021-03-30 16:46:00--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50601215527_e7b8fca980_n_320_240_nofilter.jpg [following]
+--2021-03-30 16:46:01--  https://loremflickr.com/cache/resized/65535_50601215527_e7b8fca980_n_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 12431 (12K) [image/jpeg]
+Saving to: ‘Koleksi_11.jpg’
+
+     0K .......... ..                                         100% 1.35M=0.009s
+
+2021-03-30 16:46:01 (1.35 MB/s) - ‘Koleksi_11.jpg’ saved [12431/12431]
+
+--2021-03-30 16:46:01--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/31337_50990912363_1d5914b0de_320_240_nofilter.jpg [following]
+--2021-03-30 16:46:02--  https://loremflickr.com/cache/resized/31337_50990912363_1d5914b0de_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 5072 (5.0K) [image/jpeg]
+Saving to: ‘Koleksi_12.jpg’
+
+     0K ....                                                  100% 9.17M=0.001s
+
+2021-03-30 16:46:03 (9.17 MB/s) - ‘Koleksi_12.jpg’ saved [5072/5072]
+
+--2021-03-30 16:46:03--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/1009_1393356772_4c747277b2_n_320_240_nofilter.jpg [following]
+--2021-03-30 16:46:04--  https://loremflickr.com/cache/resized/1009_1393356772_4c747277b2_n_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 23896 (23K) [image/jpeg]
+Saving to: ‘Koleksi_13.jpg’
+
+     0K .......... .......... ...                             100%  790K=0.03s
+
+2021-03-30 16:46:04 (790 KB/s) - ‘Koleksi_13.jpg’ saved [23896/23896]
+
+--2021-03-30 16:46:04--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50327661363_e835c1f837_320_240_nofilter.jpg [following]
+--2021-03-30 16:46:05--  https://loremflickr.com/cache/resized/65535_50327661363_e835c1f837_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 15071 (15K) [image/jpeg]
+Saving to: ‘Koleksi_14.jpg’
+
+     0K .......... ....                                       100%  991K=0.01s
+
+2021-03-30 16:46:05 (991 KB/s) - ‘Koleksi_14.jpg’ saved [15071/15071]
+
+--2021-03-30 16:46:05--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50620937283_d915e255cf_320_240_nofilter.jpg [following]
+--2021-03-30 16:46:07--  https://loremflickr.com/cache/resized/65535_50620937283_d915e255cf_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 15951 (16K) [image/jpeg]
+Saving to: ‘Koleksi_15.jpg’
+
+     0K .......... .....                                      100% 1.78M=0.009s
+
+2021-03-30 16:46:07 (1.78 MB/s) - ‘Koleksi_15.jpg’ saved [15951/15951]
+
+--2021-03-30 16:46:07--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50488056162_04ebb8bd48_320_240_nofilter.jpg [following]
+--2021-03-30 16:46:08--  https://loremflickr.com/cache/resized/65535_50488056162_04ebb8bd48_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 19030 (19K) [image/jpeg]
+Saving to: ‘Koleksi_16.jpg’
+
+     0K .......... ........                                   100%  997K=0.02s
+
+2021-03-30 16:46:08 (997 KB/s) - ‘Koleksi_16.jpg’ saved [19030/19030]
+
+--2021-03-30 16:46:08--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50917877588_9db3484f10_320_240_nofilter.jpg [following]
+--2021-03-30 16:46:09--  https://loremflickr.com/cache/resized/65535_50917877588_9db3484f10_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 9724 (9.5K) [image/jpeg]
+Saving to: ‘Koleksi_16.jpg’
+
+     0K .........                                             100% 2.26M=0.004s
+
+2021-03-30 16:46:10 (2.26 MB/s) - ‘Koleksi_16.jpg’ saved [9724/9724]
+
+--2021-03-30 16:46:10--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/2137_5698463352_e00807c5aa_320_240_nofilter.jpg [following]
+--2021-03-30 16:46:11--  https://loremflickr.com/cache/resized/2137_5698463352_e00807c5aa_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 15398 (15K) [image/jpeg]
+Saving to: ‘Koleksi_17.jpg’
+
+     0K .......... .....                                      100% 1.22M=0.01s
+
+2021-03-30 16:46:12 (1.22 MB/s) - ‘Koleksi_17.jpg’ saved [15398/15398]
+
+--2021-03-30 16:46:12--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50985846496_b8c64c6f20_320_240_nofilter.jpg [following]
+--2021-03-30 16:46:13--  https://loremflickr.com/cache/resized/65535_50985846496_b8c64c6f20_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 8629 (8.4K) [image/jpeg]
+Saving to: ‘Koleksi_18.jpg’
+
+     0K ........                                              100%  919K=0.009s
+
+2021-03-30 16:46:13 (919 KB/s) - ‘Koleksi_18.jpg’ saved [8629/8629]
+
+--2021-03-30 16:46:13--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/462_19922792966_1f9fe45be7_320_240_nofilter.jpg [following]
+--2021-03-30 16:46:14--  https://loremflickr.com/cache/resized/462_19922792966_1f9fe45be7_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 13102 (13K) [image/jpeg]
+Saving to: ‘Koleksi_19.jpg’
+
+     0K .......... ..                                         100% 1.72M=0.007s
+
+2021-03-30 16:46:14 (1.72 MB/s) - ‘Koleksi_19.jpg’ saved [13102/13102]
+
+--2021-03-30 16:46:14--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50807295192_39ed0da69d_320_240_nofilter.jpg [following]
+--2021-03-30 16:46:16--  https://loremflickr.com/cache/resized/65535_50807295192_39ed0da69d_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 11026 (11K) [image/jpeg]
+Saving to: ‘Koleksi_20.jpg’
+
+     0K ..........                                            100% 2.30M=0.005s
+
+2021-03-30 16:46:16 (2.30 MB/s) - ‘Koleksi_20.jpg’ saved [11026/11026]
+
+--2021-03-30 16:46:16--  https://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 172.67.170.91, 104.21.47.37, 2606:4700:3037::ac43:aa5b, ...
+Connecting to loremflickr.com (loremflickr.com)|172.67.170.91|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50327661363_e835c1f837_320_240_nofilter.jpg [following]
+--2021-03-30 16:46:17--  https://loremflickr.com/cache/resized/65535_50327661363_e835c1f837_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 15071 (15K) [image/jpeg]
+Saving to: ‘Koleksi_21.jpg’
+
+     0K .......... ....                                       100% 1.87M=0.008s
+
+2021-03-30 16:46:17 (1.87 MB/s) - ‘Koleksi_21.jpg’ saved [15071/15071]
+
+```
+
+B. Karena Kuuhaku malas untuk menjalankan script tersebut secara manual, ia juga meminta kalian untuk menjalankan script tersebut sehari sekali pada jam 8 malam untuk tanggal-tanggal tertentu setiap bulan, yaitu dari tanggal 1 tujuh hari sekali (1,8,...), serta dari tanggal 2 empat hari sekali(2,6,...). Supaya lebih rapi, gambar yang telah diunduh beserta log-nya, dipindahkan ke folder dengan nama tanggal unduhnya dengan format "DD-MM-YYYY" (contoh : "13-03-2023").
+Jawaban :
+Bash :
+``` Bash
+#!/bin/bash
+
+cd ~/soal-shift-sisop-modul-1-B10-2021/soal3:
+bash ./soal3a.sh
+now=$(date +"%d-%m-%Y")
+mkdir "$now"
+
+mv ./Koleksi_* "./$now/"
+mv ./foto.log "./$now/"
+```
+Crontab :
+``` tab
+0 20 1-31/7,2-31/4 * * bash ./home/detechtive/soal-shift-sisop-modul-1-B10-2021/soal3:/soal3b.sh
+```
+Penyelesaian :
+Untuk melakukan pemindahan, terlebih dahulu membuat folder berdasarkan format tanggal hari ini. Membuat folder dengan fungsi mkdir dengan nama sesuai tanggal hari ini (DDMMYYYY) dengan fungsi date. Untuk crontabnya, 0 dan 20 diawal menunjukkan tiap pukul 20:00, 1-31/7 mulai tanggal 1 hingga tanggal 31 tiap 7 hari sekali, 2-31/4 berarti dimulai tanggal 2 hingga tanggal 31 tiap 4 hari sekali.
+
+C. Agar kuuhaku tidak bosan dengan gambar anak kucing, ia juga memintamu untuk mengunduh gambar kelinci dari "https://loremflickr.com/320/240/bunny". Kuuhaku memintamu mengunduh gambar kucing dan kelinci secara bergantian (yang pertama bebas. contoh : tanggal 30 kucing > tanggal 31 kelinci > tanggal 1 kucing > ... ). Untuk membedakan folder yang berisi gambar kucing dan gambar kelinci, nama folder diberi awalan "Kucing_" atau "Kelinci_" (contoh : "Kucing_13-03-2023").
+Jawaban :
+``` Bash
+#!/bin/bash
+kemarin=$(date -d yesterday +"%d-%m-%Y")
+now=$(date +"%d-%m-%Y")
+slocate=$(ls Kucing_$now)
+locate=$?
+if ((locate==0))
+then
+    q=1
+    j=1
+    mkdir "Kelinci_$now"
+    for((j=1;j<=23; j=j+1))
+    do
+            if ((q<10))
+            then
+            wget -O Koleksi_0$q.jpg -a foto.log https://loremflickr.com/320/240/bunny
+                    for((i=1; i<q; i=i+1))
+                    do
+                s=$(cmp "./Koleksi_0$i.jpg" "./Koleksi_0$q.jpg")
+                a=$?
+                            if [ $a -eq 0 ] 
+                            then
+                                    rm "./Koleksi_0$q.jpg"
+                    q=$((q-1))
+                    break
+                            fi
+                    done
+            else
+            wget -O Koleksi_$q.jpg -a foto.log https://loremflickr.com/320/240/bunny
+                    for((i=1; i<q; i=i+1))
+                    do
+                if((i<10))
+                            then
+                                    s=$(cmp "./Koleksi_0$i.jpg" "./Koleksi_$q.jpg")
+                        a=$?
+                                    if [ $a -eq 0 ]
+                                    then
+                            rm "./Koleksi_$q.jpg"
+                            q=$((q-1))
+                            break
+                                    fi
+                            else
+                                    s=$(cmp "./Koleksi_$i.jpg" "./Koleksi_$q.jpg")
+                        a=$?
+                                    if [ $a -eq 0 ]
+                                    then
+                            rm "./Koleksi_$q.jpg"
+                            q=$((q-1))
+                            break
+                                    fi
+                            fi
+                    done
+            fi
+            q=$((q+1))
+    done
+    mv ./Koleksi_* "./Kelinci_$now/"
+    mv ./foto.log "./Kelinci_$now/"
+else
+    q=0
+    j=0
+    mkdir "Kucing_$now"
+    for((j=1;j<=23; j=j+1))
+    do
+            if ((q<10))
+            then
+            wget -O Koleksi_0$q.jpg -a foto.log https://loremflickr.com/320/240/kitten
+                    for((i=1; i<q; i=i+1))
+                    do
+                s=$(cmp "./Koleksi_0$i.jpg" "./Koleksi_0$q.jpg")
+                a=$?
+                            if [ $a -eq 0 ] 
+                            then
+                                    rm "./Koleksi_0$q.jpg"
+                    q=$((q-1))
+                    break
+                            fi
+                    done
+            else
+            wget -O Koleksi_$q.jpg -a foto.log https://loremflickr.com/320/240/kitten
+                    for((i=1; i<q; i=i+1))
+                    do
+                if((i<10))
+                            then
+                                    s=$(cmp "./Koleksi_0$i.jpg" "./Koleksi_$q.jpg")
+                        a=$?
+                                    if [ $a -eq 0 ]
+                                    then
+                            rm "./Koleksi_$q.jpg"
+                            q=$((q-1))
+                            break
+                                    fi
+                            else
+                                    s=$(cmp "./Koleksi_$i.jpg" "./Koleksi_$q.jpg")
+                        a=$?
+                                    if [ $a -eq 0 ]
+                                    then
+                            rm "./Koleksi_$q.jpg"
+                            q=$((q-1))
+                            break
+                                    fi
+                            fi
+                    done
+            fi
+            q=$((q+1))
+    done
+    mv ./Koleksi_* "./Kucing_$now/"
+    mv ./foto.log "./Kucing_$now/"
+fi
+```
+Penyelesaian :
+Sama seperti poin a dan b, untuk poin c ini untuk memeriksa folder sudah ada atau tidak bisa menggunakan fungsi ls untuk mencari folder degan nama kuring dan tanggal kemarin, jika returnnya 0, maka akan mendownload kelnci, karena folder kucing sudah ada.
+
+D. Untuk mengamankan koleksi Foto dari Steven, Kuuhaku memintamu untuk membuat script yang akan memindahkan seluruh folder ke zip yang diberi nama “Koleksi.zip” dan mengunci zip tersebut dengan password berupa tanggal saat ini dengan format "MMDDYYYY" (contoh : “03032003”).
+Jawaban :
+``` Bash
+zip -q -P `date +"%m%d%Y"` -r -m Koleksi.zip ./Kucing* ./Kelinci*
+```
+Penjelasan :
+Untuk memasukkan folder kedalam menggunakan fungsi zip dengan option -q agar log tidak tampil di terminal, -P untuk set password pada zipnya dengan format tanggal hari ini (MMDDYYYY), -r untuk memasukkan semua file secara recursive, -m untuk menghapus folder setelah di zip.
+
+E. Karena kuuhaku hanya bertemu Steven pada saat kuliah saja, yaitu setiap hari kecuali sabtu dan minggu, dari jam 7 pagi sampai 6 sore, ia memintamu untuk membuat koleksinya ter-zip saat kuliah saja, selain dari waktu yang disebutkan, ia ingin koleksinya ter-unzip dan tidak ada file zip sama sekali.
+Jawaban :
+``` tab
+0 7 * * 1-5 zip -q -P `date +"%m%d%Y"` -r Koleksi.zip ./Kucing* ./Kelinci*
+0 18 * * 1-5 unzip -q -P `date +"%m%d%Y"` Koleksi.zip && rm Koleksi.zip
+```
+Penjelasan :
+Sama seperti poin D, untuk arti dari crontabnya, 0 7 berarti setiap pukul 7 AM, 1-5 dibelakang berarti tiap hari senin-jumat, karena proses ini hanya dilakukan di jam kuliah. 0 18 berarti setiap pukul 18 / 6 PM, 1-5 dibelakang berarti tiap hari senin-jumat. Pada proses unzip, ditambahkan fungsi rm agar file zip erhapus.
