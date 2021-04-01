@@ -224,6 +224,12 @@ Inisiasi awal untuk menyelesaikan persoalan diatas adalah kita melihat terlebih 
 
 
 ```
+Kendala yang dihadapi : Pembuatan command dan harus membuat inisiasi sendiri untuk mencari INFO dan ERROR beserta format yang telah diberikan, sehingga membuat saya agak memakan waktu untuk menyelesaikan ini karena ini merupakan kerangka yang akan digunakan dibawahnya.
+![Image1](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1ASoalShiftHasil1.jpeg)
+![Image2}(https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1ASoalShiftHasil2.jpeg)
+![Image3](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1ASoalShiftHasil3.jpeg)
+![Image4](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1ASoalShiftHasil4.jpeg)
+![image5)(https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1ASoalShiftHasil5.jpeg)
 
 
 B. Kemudian, Ryujin harus menampilkan semua pesan error yang muncul beserta jumlah kemunculannya.
@@ -237,6 +243,9 @@ pinfo=`printf "$allerrorinfo" | grep -o 'INFO.*' syslog.log | cut -f2- -d\ | cut
 Penyelesaian : 
 Setelah kita mendapatkan hasil dari permasalahan A kita bisa melanjutkan permasalahan kedua yaitu menampilkan semua pesan error yang muncul beserta jumlahnya disini saya buat error dan info supaya saya bisa checking lagi untuk nomor selanjutnya. Disini saya akan menjelaskan ide yang saya buat yaitu mengambil semua pesan error diletakkan di perror dan semua pesan info diletakkan di pinfo. Ide saya adalah saya cek apalagi line itu mengandung (ERROR/INFO) dan diklusterisasi ke variabel yang sudah dibuat. Ide disini untuk hanya mengambil pesan saja yaitu ambil line setelah (ERROR/INFO) sampai program ketemu dengan "(" dengan menggunakan cut -d"(" maksudnya adalah memotong sampai ketemu delimeter "(". Setelah itu disini saya lakukan sorting value, mengambil nilai uniq -c dan setelah itu saya sort secara Descending. Hasilnya adalah sebagai berikut
 
+Kendala yang dihadapi : Awalnya saya agak bingung untuk sort by valuenya bagaimana setelah baca dokumentasi saya mengerti command-command yang dibutuhkan agar lebih cepat dan efisiensi waktu pada saat pengerjaan.
+
+![Imagesoal2](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1BSoalShiftHasil.jpeg) 
 ``` Csv
 15 Timeout while retrieving information 13 Connection to DB failed 12 Tried to add information to closed ticket 10 Permission denied while closing ticket 9 The ticket was modified while updating 7 Ticket doesn't exist
 ```
@@ -295,6 +304,10 @@ Penyelesaian yang saya buat disini untuk memunculkan jumlah kemunculan log ERROR
       2 rr.robinson
       2 sri
 ```
+Kendala yang dihadapi : Pada saat pencarian jumlah error ini juga sama dengan persoalan B tetapi hanya mengubah kondisi dimana hanya user yang kita hitung. Kendala saya adalah pada saat pencarian user saya harus menginisiasi lagi dan mengumpulkan nama-nama user untuk nanti dieksekusi secara uniq -c untuk menghitung jumlahnya.
+
+![Image1C](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1CSoalShiftHasilERROR.jpeg)
+![Image1C1](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1CSoalShiftHasilINFO.jpeg)
 
 
 D. Semua informasi yang didapatkan pada poin b dituliskan ke dalam file error_message.csv dengan header Error,Count yang kemudian diikuti oleh daftar pesan error dan jumlah kemunculannya diurutkan berdasarkan jumlah kemunculan pesan error dari yang terbanyak.
@@ -322,6 +335,10 @@ Permission denied while closing ticket,10
 The ticket was modified while updating,9
 Ticket doesn't exist,7
 ```
+
+Kendala yang dihadapi : Kendala yang saya hadapi adalah saya bingung untuk menempatkan dan mencari nilai errornya ternyata setelah baca di dokumentasi regex terdapat cut yang bisa diambil mengikuti fieldnya sehingga mempermudah saat pengerjaan.
+
+![image1D](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1DSoalShifHasil.jpeg)
 
 E. Semua informasi yang didapatkan pada poin c dituliskan ke dalam file user_statistic.csv dengan header Username,INFO,ERROR diurutkan berdasarkan username secara ascending.
 Jawaban :
@@ -384,6 +401,10 @@ oren,2,7
 rr.robinson,2,1
 sri,2,2
 ```
+
+Kendala yang dihadapi : Sebenarnya nomer 1 E ini sama saja seperti 1 D tetapi dia menghitung ERROR dan INFO setiap username. Kendala saya adalah saya awalnya tidak memiliki user apa saja yang ada di syslog.log, setelah itu saya buat usertag untuk membantu persoalan ini alhasil saya bisa mengerjakannya.
+
+![image1E](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1ESoalShifHasil.jpeg)
 
 **No. 2**  
 Steven dan Manis mendirikan sebuah startup bernama “TokoShiSop”. Sedangkan kamu dan Clemong adalah karyawan pertama dari TokoShiSop. Setelah tiga tahun bekerja, Clemong diangkat menjadi manajer penjualan TokoShiSop, sedangkan kamu menjadi kepala gudang yang mengatur keluar masuknya barang. Tiap tahunnya, TokoShiSop mengadakan Rapat Kerja yang membahas bagaimana hasil penjualan dan strategi kedepannya yang akan diterapkan. Kamu sudah sangat menyiapkan sangat matang untuk raker tahun ini. Tetapi tiba-tiba, Steven, Manis, dan Clemong meminta kamu untuk mencari beberapa kesimpulan dari data penjualan “Laporan-TokoShiSop.tsv”. Dari soal ini kita diminta untuk menyelesaikan permaslahan yang didapatkan oleh Steven, Manis, & Clemong.  
