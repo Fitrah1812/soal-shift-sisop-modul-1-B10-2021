@@ -225,11 +225,16 @@ Inisiasi awal untuk menyelesaikan persoalan diatas adalah kita melihat terlebih 
 
 ```
 Kendala yang dihadapi : Pembuatan command dan harus membuat inisiasi sendiri untuk mencari INFO dan ERROR beserta format yang telah diberikan, sehingga membuat saya agak memakan waktu untuk menyelesaikan ini karena ini merupakan kerangka yang akan digunakan dibawahnya.
+
 ![Image1](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1ASoalShiftHasil1.jpeg)
-![Image2}(https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1ASoalShiftHasil2.jpeg)
+
+![Image2](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1ASoalShiftHasil2.jpeg)
+
 ![Image3](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1ASoalShiftHasil3.jpeg)
+
 ![Image4](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1ASoalShiftHasil4.jpeg)
-![image5)(https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1ASoalShiftHasil5.jpeg)
+
+![image5](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1ASoalShiftHasil5.jpeg)
 
 
 B. Kemudian, Ryujin harus menampilkan semua pesan error yang muncul beserta jumlah kemunculannya.
@@ -307,6 +312,7 @@ Penyelesaian yang saya buat disini untuk memunculkan jumlah kemunculan log ERROR
 Kendala yang dihadapi : Pada saat pencarian jumlah error ini juga sama dengan persoalan B tetapi hanya mengubah kondisi dimana hanya user yang kita hitung. Kendala saya adalah pada saat pencarian user saya harus menginisiasi lagi dan mengumpulkan nama-nama user untuk nanti dieksekusi secara uniq -c untuk menghitung jumlahnya.
 
 ![Image1C](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1CSoalShiftHasilERROR.jpeg)
+
 ![Image1C1](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1CSoalShiftHasilINFO.jpeg)
 
 
