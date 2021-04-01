@@ -594,6 +594,11 @@ done
 Penyelesaian :
 Untuk mengunduh gambar secara berulang ulang, salah satu metode yang bisa digunakan adalah menggunakan looping hingga 23 kali. Mengunduh file dengan perintah wget dengan option -O untuk menamai file sesuai dengan perntah dan -a untuk menyimpan log ke dalam file foto.log. Agar tidak ada foto yang sama, dilakukan checking menggunakan fungsi cmp, apabila return dari fungsi tersebut adalah 0, maka foto tersebut sama. Proses ini juga diulang ulang untuk setiap foto yang terdownload.
 
+Berikut adalah hasil gambar yang terunduh beserta log nya :
+
+![3a](https://user-images.githubusercontent.com/75357640/113313808-d0c42f80-9335-11eb-9b2b-d35b3bff5bf4.PNG)
+
+
 Berikut adalah contoh dari foto.log yang didapatkan setelah proses:
 
 ``` log
@@ -944,6 +949,8 @@ Saving to: ‘Koleksi_21.jpg’
 
 ```
 
+Kendala yang dihadapi untuk mengerjakan soal ini adalah mencari cara untuk membandingkan gambar apakah sama atau tidak. Awalnya saya berpikir untuk membadingkan tautan dengan mengambilnya dari file log dengan awk, namun saya menemukan cara yang lebih mudah yaitu dengan fungsi cmp.
+
 B. Karena Kuuhaku malas untuk menjalankan script tersebut secara manual, ia juga meminta kalian untuk menjalankan script tersebut sehari sekali pada jam 8 malam untuk tanggal-tanggal tertentu setiap bulan, yaitu dari tanggal 1 tujuh hari sekali (1,8,...), serta dari tanggal 2 empat hari sekali(2,6,...). Supaya lebih rapi, gambar yang telah diunduh beserta log-nya, dipindahkan ke folder dengan nama tanggal unduhnya dengan format "DD-MM-YYYY" (contoh : "13-03-2023").
 Jawaban :
 Bash :
@@ -964,6 +971,12 @@ Crontab :
 ```
 Penyelesaian :
 Untuk melakukan pemindahan, terlebih dahulu membuat folder berdasarkan format tanggal hari ini. Membuat folder dengan fungsi mkdir dengan nama sesuai tanggal hari ini (DDMMYYYY) dengan fungsi date. Untuk crontabnya, 0 dan 20 diawal menunjukkan tiap pukul 20:00, 1-31/7 mulai tanggal 1 hingga tanggal 31 tiap 7 hari sekali, 2-31/4 berarti dimulai tanggal 2 hingga tanggal 31 tiap 4 hari sekali.
+
+Hasil folder setelah proses :
+
+![3b](https://user-images.githubusercontent.com/75357640/113314214-45976980-9336-11eb-8a44-1a4bcc573aae.PNG)
+
+Kendala yang dihadapi untuk menyelesaikan permasalahan ini adalah untuk membuat file crontabnya, karena saat itu saya masih kurang paham dengan crontab. Awalnya saya menggunakan 2 line crontab untuk 2 wakt yang berbeda, ternyata bisa menggunakan 1 line cron dengan dipisahkan koma.
 
 C. Agar kuuhaku tidak bosan dengan gambar anak kucing, ia juga memintamu untuk mengunduh gambar kelinci dari "https://loremflickr.com/320/240/bunny". Kuuhaku memintamu mengunduh gambar kucing dan kelinci secara bergantian (yang pertama bebas. contoh : tanggal 30 kucing > tanggal 31 kelinci > tanggal 1 kucing > ... ). Untuk membedakan folder yang berisi gambar kucing dan gambar kelinci, nama folder diberi awalan "Kucing_" atau "Kelinci_" (contoh : "Kucing_13-03-2023").
 Jawaban :
@@ -1079,6 +1092,12 @@ fi
 Penyelesaian :
 Sama seperti poin a dan b, untuk poin c ini untuk memeriksa folder sudah ada atau tidak bisa menggunakan fungsi ls untuk mencari folder degan nama kuring dan tanggal kemarin, jika returnnya 0, maka akan mendownload kelnci, karena folder kucing sudah ada.
 
+Berikut hasil dari proses diatas :
+
+![3c](https://user-images.githubusercontent.com/75357640/113315360-6613f380-9337-11eb-9993-c6f5e58452e3.PNG)
+
+Kendala yang dihadapi selama mengerjakan soal 3c tidak ada, karena sama soal 3a.
+
 D. Untuk mengamankan koleksi Foto dari Steven, Kuuhaku memintamu untuk membuat script yang akan memindahkan seluruh folder ke zip yang diberi nama “Koleksi.zip” dan mengunci zip tersebut dengan password berupa tanggal saat ini dengan format "MMDDYYYY" (contoh : “03032003”).
 Jawaban :
 ``` Bash
@@ -1087,6 +1106,12 @@ zip -q -P `date +"%m%d%Y"` -r -m Koleksi.zip ./Kucing* ./Kelinci*
 Penjelasan :
 Untuk memasukkan folder kedalam menggunakan fungsi zip dengan option -q agar log tidak tampil di terminal, -P untuk set password pada zipnya dengan format tanggal hari ini (MMDDYYYY), -r untuk memasukkan semua file secara recursive, -m untuk menghapus folder setelah di zip.
 
+Berikut hasil dari proses diatas :
+
+![3d](https://user-images.githubusercontent.com/75357640/113315648-b428f700-9337-11eb-806e-c78658ba4f2a.PNG)
+
+Kedala yang dihadapi adalah cara untuk memberikan password. Awalnya saya bingung karena saya tidak tahu cara untuk mengatur agar passwordnya sesuai tanggal hari ini.
+
 E. Karena kuuhaku hanya bertemu Steven pada saat kuliah saja, yaitu setiap hari kecuali sabtu dan minggu, dari jam 7 pagi sampai 6 sore, ia memintamu untuk membuat koleksinya ter-zip saat kuliah saja, selain dari waktu yang disebutkan, ia ingin koleksinya ter-unzip dan tidak ada file zip sama sekali.
 Jawaban :
 ``` tab
@@ -1094,4 +1119,6 @@ Jawaban :
 0 18 * * 1-5 unzip -q -P `date +"%m%d%Y"` Koleksi.zip && rm Koleksi.zip
 ```
 Penjelasan :
-Sama seperti poin D, untuk arti dari crontabnya, 0 7 berarti setiap pukul 7 AM, 1-5 dibelakang berarti tiap hari senin-jumat, karena proses ini hanya dilakukan di jam kuliah. 0 18 berarti setiap pukul 18 / 6 PM, 1-5 dibelakang berarti tiap hari senin-jumat. Pada proses unzip, ditambahkan fungsi rm agar file zip erhapus.
+Sama seperti poin D, untuk arti dari crontabnya, 0 7 berarti setiap pukul 7 AM, 1-5 dibelakang berarti tiap hari senin-jumat, karena proses ini hanya dilakukan di jam kuliah. 0 18 berarti setiap pukul 18 / 6 PM, 1-5 dibelakang berarti tiap hari senin-jumat. Pada proses unzip, ditambahkan fungsi rm agar file zip terhapus.
+
+Kendala untuk nomor ini adalah tidak ada, karena kendalanya sudah saya hadapi di nomor 3b dan 3d.
