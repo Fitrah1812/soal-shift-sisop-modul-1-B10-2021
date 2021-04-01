@@ -248,12 +248,12 @@ pinfo=`printf "$allerrorinfo" | grep -o 'INFO.*' syslog.log | cut -f2- -d\ | cut
 Penyelesaian : 
 Setelah kita mendapatkan hasil dari permasalahan A kita bisa melanjutkan permasalahan kedua yaitu menampilkan semua pesan error yang muncul beserta jumlahnya disini saya buat error dan info supaya saya bisa checking lagi untuk nomor selanjutnya. Disini saya akan menjelaskan ide yang saya buat yaitu mengambil semua pesan error diletakkan di perror dan semua pesan info diletakkan di pinfo. Ide saya adalah saya cek apalagi line itu mengandung (ERROR/INFO) dan diklusterisasi ke variabel yang sudah dibuat. Ide disini untuk hanya mengambil pesan saja yaitu ambil line setelah (ERROR/INFO) sampai program ketemu dengan "(" dengan menggunakan cut -d"(" maksudnya adalah memotong sampai ketemu delimeter "(". Setelah itu disini saya lakukan sorting value, mengambil nilai uniq -c dan setelah itu saya sort secara Descending. Hasilnya adalah sebagai berikut
 
-Kendala yang dihadapi : Awalnya saya agak bingung untuk sort by valuenya bagaimana setelah baca dokumentasi saya mengerti command-command yang dibutuhkan agar lebih cepat dan efisiensi waktu pada saat pengerjaan.
-
-![Imagesoal2](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1BSoalShiftHasil.jpeg) 
 ``` Csv
 15 Timeout while retrieving information 13 Connection to DB failed 12 Tried to add information to closed ticket 10 Permission denied while closing ticket 9 The ticket was modified while updating 7 Ticket doesn't exist
 ```
+Kendala yang dihadapi : Awalnya saya agak bingung untuk sort by valuenya bagaimana setelah baca dokumentasi saya mengerti command-command yang dibutuhkan agar lebih cepat dan efisiensi waktu pada saat pengerjaan.
+
+![Imagesoal2](https://github.com/Fitrah1812/soal-shift-sisop-modul-1-B10-2021/blob/main/Dokumentasi/1BSoalShiftHasil.jpeg) 
 
 C. Ryujin juga harus dapat menampilkan jumlah kemunculan log ERROR dan INFO untuk setiap user-nya.
 Jawaban :
