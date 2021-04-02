@@ -436,7 +436,7 @@ Disini diminta untuk menempilkan data yang berisi Row ID dan profit percentage t
 ``` txt
 Transaksi terakhir dengan profit percentage terbesar yaitu 9952 dengan presentase 100.00%.
 ```  
-Kendala yang dihadapi:  Sempat terjadi error karena saya tidak menggunakan seperator tab yang dibutuhkan untuk membaca data yang memiliki ekstensi tsv.
+Kendala yang dihadapi :  Sempat terjadi error karena saya tidak menggunakan seperator tab yang dibutuhkan untuk membaca data yang memiliki ekstensi tsv.
 
 B. Clemong memiliki rencana promosi di Albuquerque menggunakan metode MLM. Oleh karena itu, Clemong membutuhkan daftar **nama customer pada transaksi tahun 2017 di Albuquerque**.  
 ``` Bash
@@ -454,7 +454,7 @@ David Wiener
 Benjamin Farhat
 Michelle Lonsdale
 ```  
-Kendala yang dihadapi: perbedaan isi data date yang apabila dibuka pada aplikasi windows seperti wps, data date yang terbaca untuk tahun berformat '2017' sedangkan pada ubuntu data tersebut dengan format tahun '17'  sehingga saya salah beberapa kali dalam menampilkan data sesuai yang diinginkan oleh soal karena saya mencari data tahun dengan format '2017'.  
+Kendala yang dihadapi : perbedaan isi data date yang apabila dibuka pada aplikasi windows seperti wps, data date yang terbaca untuk tahun berformat '2017' sedangkan pada ubuntu data tersebut dengan format tahun '17'  sehingga saya salah beberapa kali dalam menampilkan data sesuai yang diinginkan oleh soal karena saya mencari data tahun dengan format '2017'.  
 
 C. TokoShiSop berfokus tiga segment customer, antara lain: Home Office, Customer, dan Corporate. Clemong ingin meningkatkan penjualan pada segmen customer yang paling sedikit. Oleh karena itu, Clemong membutuhkan **segment customer** dan **jumlah transaksinya yang paling sedikit**.  
 ``` Bash
@@ -477,7 +477,7 @@ Data yang ingin ditampilkan adalah segmen customer dan jumlah transaksi paling s
 ``` txt
 Tipe segmen customer yang penjualannya paling sedikit adalah Home Office dengan 1783 transaksi.
 ```  
-Kendala yang dihadapi: Kesalahan saya dalam melihat kolom data keberapa. Semisal seharus nya kolom ke 8 ($8) saya tulis kolom ke 10 ($10) sehingga ini murni karena ketidak telitian saja.  
+Kendala yang dihadapi : Kesalahan saya dalam melihat kolom data keberapa. Semisal seharus nya kolom ke 8 ($8) saya tulis kolom ke 10 ($10) sehingga ini murni karena ketidak telitian saja.  
 
 D. TokoShiSop membagi wilayah bagian (region) penjualan menjadi empat bagian, antara lain: Central, East, South, dan West. Manis ingin **mencari wilayah bagian (region) yang memiliki total keuntungan (profit) paling sedikit** dan **total keuntungan wilayah tersebut**.  
 ``` Bash
